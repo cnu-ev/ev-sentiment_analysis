@@ -13,7 +13,7 @@ class Sentiment_analysis_model:
     def __init__(self, trainDataVecs , train_tags):
         self.x_train = trainDataVecs
         self.y_train = np.asarray(train_tags).astype('float32')
-
+        self.make_model()
 
 # print(len(x_train))
 
