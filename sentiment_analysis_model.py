@@ -36,3 +36,18 @@ class Sentiment_analysis_model:
         y_test = np.asarray(test_tags).astype('float32')
         results = run_model.evaluate(x_test, y_test)
         return results #[loss,score]
+
+
+    def predict_pos_neg(review,run_model):
+        token = tokenize(review)
+        reviewFeatureVecs = np.zeros((1,num_features),dtype="float32")
+        reviewFeatureVecs[0] = review_vec = makeFeatureVec(token, model, num_features)
+        score = float(run_model.predict(reviewFeatureVecs))
+        if(score > 0.5):
+            print("[{}]는 {:.2f}% 확률로 긍정 리뷰\n".format(review, score * 100))
+        else:
+            print("[{}]는 {:.2f}% 확률로 부정 리뷰\n".format(review, (1 - score) * 100))
+
+
+
+    # predict_pos_neg("아 이규봉이 디자인한 댓글페이지 좋은데요? 추천합니다 사용할께요",run_model)
