@@ -2,7 +2,7 @@ from data_manager import Data_manager
 from data_preprocessor import Data_preprocessor
 from word2vec_embedder import Word2vec_embedder
 from sentiment_analysis_model import Sentiment_analysis_model
-
+import word2vec_embedder as word2vec_embbeding_module
 
 # data_preprocessor = Data_preprocessor()
 
