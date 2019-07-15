@@ -38,11 +38,11 @@ class Sentiment_analysis_model:
         return results #[loss,score]
 
 
-    def predict_pos_neg(review,run_model):
-        token = tokenize(review)
+    def predict_pos_neg(self,review,word2vec_model,num_features):
+        token = data_preprocessor.tokenize(review)
         reviewFeatureVecs = np.zeros((1,num_features),dtype="float32")
-        reviewFeatureVecs[0] = review_vec = makeFeatureVec(token, model, num_features)
-        score = float(run_model.predict(reviewFeatureVecs))
+        reviewFeatureVecs[0] = review_vec = word2vec_embedder.makeFeatureVec(token, word2vec_model, num_features)
+        score = float(self.run_model.predict(reviewFeatureVecs))
         if(score > 0.5):
             print("[{}]는 {:.2f}% 확률로 긍정 리뷰\n".format(review, score * 100))
         else:
