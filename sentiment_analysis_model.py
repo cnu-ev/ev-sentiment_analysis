@@ -30,3 +30,9 @@ class Sentiment_analysis_model:
                  metrics=[metrics.binary_accuracy])
 
         run_model.fit(x_train, y_train, epochs=10, batch_size=512)
+
+    def model_evaluate(self,testDataVecs,test_tags):
+        x_test = testDataVecs
+        y_test = np.asarray(test_tags).astype('float32')
+        results = run_model.evaluate(x_test, y_test)
+        return results #[loss,score]
