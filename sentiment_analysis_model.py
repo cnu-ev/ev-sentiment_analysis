@@ -20,12 +20,12 @@ class Sentiment_analysis_model:
 
 # len(y_train)
     def make_model(self):
-        run_model = models.Sequential()
-        run_model.add(layers.Dense(64, activation='relu', input_shape=(300,)))
-        run_model.add(layers.Dense(64, activation='relu'))
-        run_model.add(layers.Dense(1, activation='sigmoid'))
+        self.run_model = models.Sequential()
+        self.run_model.add(layers.Dense(64, activation='relu', input_shape=(300,)))
+        self.run_model.add(layers.Dense(64, activation='relu'))
+        self.run_model.add(layers.Dense(1, activation='sigmoid'))
 
-        run_model.compile(optimizer=optimizers.RMSprop(lr=0.002),
+        self.run_model.compile(optimizer=optimizers.RMSprop(lr=0.002),
                  loss=losses.binary_crossentropy,
                  metrics=[metrics.binary_accuracy])
 
