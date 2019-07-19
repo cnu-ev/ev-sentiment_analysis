@@ -43,7 +43,7 @@ class Sentiment_analysis_model:
         reviewFeatureVecs = np.zeros((1,num_features),dtype="float32")
         reviewFeatureVecs[0] = review_vec = word2vec_embedder.makeFeatureVec(token, word2vec_model, num_features)
         score = float(self.run_model.predict(reviewFeatureVecs))
-        return sentences, score * 100 - 50
+        return review, score * 100 - 50
 
 
 

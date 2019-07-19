@@ -43,7 +43,7 @@ class Sentiment_analysis:
         #embedding 된 vector_set과 정답지로 Sentiment_analysis 모델 생성
         self.sentiment_analysis_model = Sentiment_analysis_model(trainDataVecs,train_tags)
     def Sentiment_analysis_predict_pos_neg(self,sentence):
-        sentence, score = self.sentiment_sanalysis_model.predict_pos_neg(sentence,self.word2vec_embedder.model,self.word2vec_embedder.num_features)
+        sentence, score = self.sentiment_analysis_model.predict_pos_neg(sentence,self.word2vec_embedder.model,self.word2vec_embedder.num_features)
         return sentence,score
 
 if __name__ == "__main__":
@@ -53,4 +53,4 @@ if __name__ == "__main__":
 
     sentiment_analysis = Sentiment_analysis(train_text_dir,test_text_dir)
 
-    sentence, score = sentiment_analysis.Sentiment_analysis_predict_pos_neg("adfdasfasf")
+    sentence, score = sentiment_analysis.Sentiment_analysis_predict_pos_neg("아 왜 이렇게 느려 짜증나게")
