@@ -31,14 +31,14 @@ class Sentiment_analysis:
         #data_manager 생성
         self.data_manager = Data_manager(train_text_dir,test_text_dir)
 
-        self.train_sentences = data_manager.get_train_sentences()
-        self.train_tags = data_manager.get_train_tags()
+        train_sentences = self.data_manager.get_train_sentences()
+        train_tags = self.data_manager.get_train_tags()
 
         #학습 문장으로 word2_vec_embedder 생성
         self.word2vec_embedder = Word2vec_embedder(train_sentences)
 
         #word2vec 방식으로 embedding 된 vector_set
-        self.trainDataVecs = word2vec_embbeding_module.getAvgFeatureVecs(train_sentences , word2vec_embedder.model,word2vec_embedder.num_features)
+        trainDataVecs = word2vec_embbeding_module.getAvgFeatureVecs(train_sentences , self.word2vec_embedder.model,self.word2vec_embedder.num_features)
 
         #embedding 된 vector_set과 정답지로 Sentiment_analysis 모델 생성
         self.sentiment_analysis_model = Sentiment_analysis_model(trainDataVecs,train_tags)
