@@ -43,10 +43,7 @@ class Sentiment_analysis_model:
         reviewFeatureVecs = np.zeros((1,num_features),dtype="float32")
         reviewFeatureVecs[0] = review_vec = word2vec_embedder.makeFeatureVec(token, word2vec_model, num_features)
         score = float(self.run_model.predict(reviewFeatureVecs))
-        if(score > 0.5):
-            print("[{}]는 {:.2f}% 확률로 긍정 리뷰\n".format(review, score * 100))
-        else:
-            print("[{}]는 {:.2f}% 확률로 부정 리뷰\n".format(review, (1 - score) * 100))
+        return sentences, score * 100 - 50
 
 
 
