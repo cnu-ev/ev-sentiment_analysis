@@ -1,4 +1,5 @@
-from eunjeon import Mecab
+# from eunjeon import Mecab
+from konlpy.tag import Mecab
 import pickle
 
 tagger = Mecab()
