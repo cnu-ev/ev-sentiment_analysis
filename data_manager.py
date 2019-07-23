@@ -23,3 +23,11 @@ class Data_manager:
         new_data = data_preprocessor.read_data(report_data_dir)
         new_train_data_set = [(data_preprocessor.tokenize(row[1]),row[2]) for row in new_data]
         self.train_text = self.train_text + new_train_data_set
+
+    def save_data(self,data_list,data_dir):
+        with open(data_dir,'wb') as f:
+            pickle.dump(data_list,f)
+
+    def load_data(self,data_dir):
+        with open(data_dir, 'rb') as f:
+            return pickle.load(f)
