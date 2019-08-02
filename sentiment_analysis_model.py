@@ -63,6 +63,10 @@ class Sentiment_analysis_model:
         model = load_model('model.h5')
         return model
 
+    def set_x_train(trainDataVecs):
+        self.x_train = trainDataVecs
+    def set_y_train(train_tags):
+        self.y_train
 
 
     # predict_pos_neg("아 이규봉이 디자인한 댓글페이지 좋은데요? 추천합니다 사용할께요",run_model)
