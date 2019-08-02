@@ -45,10 +45,11 @@ class Sentiment_analysis:
         with open('trainDataVecs.pkl','wb') as f:
             pickle.dump(trainDataVecs, f)
         #embedding 된 vector_set과 정답지로 Sentiment_analysis 모델 생성
-        self.sentiment_analysis_model = Sentiment_analysis_model(trainDataVecs,train_tags)
-
+        self.sentiment_analysis_model.set_x_train(trainDataVecs)
+        self.sentiment_analysis_model.set_y_train(train_tags)
+        self.sentiment_analysis_model.make_model()
 
 if __name__ == "__main__":
-
+    #전처리 완료된 학습데이터 경로
     sentiment_analysis = Sentiment_analysis()
-    sentiment_analysis.Sentiment_analysis_predict_pos_neg("")
+    sentiment_analysis.Sentiment_analysis_predict_pos_neg("테스트")
