@@ -3,8 +3,8 @@ import data_preprocessor
 
 
 class Data_manager:
-    preprocessed_train_text_dir = './data_set_to_pickle/train_text_set.pkl'
-    preprocessed_test_text_dir = './data_set_to_pickle/test_text.pkl'
+    preprocessed_train_text_dir = './data_set_to_pickle/preprocessed_text_train.pkl'
+    preprocessed_test_text_dir = './data_set_to_pickle/preprocessed_text_test.pkl'
     def __init__(self):
         self.train_text = self.load_data(self.preprocessed_train_text_dir)
         self.test_text = self.load_data(self.preprocessed_test_text_dir)
@@ -23,7 +23,7 @@ class Data_manager:
         new_data = data_preprocessor.read_data(report_data_dir)
         new_train_data_set = [(data_preprocessor.tokenize(row[1]),row[2]) for row in new_data]
         self.train_text = self.train_text + new_train_data_set
-        save_data(self.train_text,self.preprocessed_train_text_dir)
+        # save_data(self.train_text,self.preprocessed_train_text_dir)
 
     def save_data(self,data_list,data_dir):
         with open(data_dir,'wb') as f:
