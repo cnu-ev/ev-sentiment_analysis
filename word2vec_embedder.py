@@ -52,8 +52,11 @@ class Word2vec_embedder:
     context = 10 # 문자열 창 크기
     downsampling = 1e-3 # 문자 빈도 수 Downsample
     def __init__(self,train_sentences):
-        self.make_model(train_sentences)
+        # self.make_model(train_sentences)
+        self.model = self.load_model()
 
+    # def __init__(self):
+        # self.model = self.load_model('word2vec.model')
 
     def make_model(self,train_sentences):
         # 모델 학습
@@ -65,6 +68,11 @@ class Word2vec_embedder:
                                   sample=self.downsampling)
         # 학습이 완료 되면 필요없는 메모리를 unload 시킨다.
         self.model.init_sims(replace=True)
+        self.model.save("word2vec.model")
+
 
     def get_model(self):
         return self.model
+
+    def load_model(self):
+        return word2vec.Word2Vec.load('word2vec.model')
