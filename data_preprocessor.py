@@ -1,6 +1,7 @@
 from eunjeon import Mecab
 # from konlpy.tag import Mecab
 import pickle
+from glove import Glove
 
 tagger = Mecab()
 
@@ -16,11 +17,27 @@ def read_data(file):
 
 def texts_generalizing(texts):
     sentence = tagger.pos(texts)
-        for word in sentence:
-            word_,tag = word
-            if('JK' in tag or 'JC' in tag or 'JX' in tag or 'VC' in tag):
-                sentence.remove(word)
+    for word in sentence:
+        word_,tag = word
+        if('JK' in tag or 'JC' in tag or 'JX' in tag or 'VC' in tag):
+            sentence.remove(word)
     return sentence
+
+
+def indexing_embedding(texts,glove_dictionary):
+    sentence=texts
+    zero_vecotr_index = len(glove_dictionary)
+    list_ = []
+    for word in sentence:
+        if(word in glove_dictionary):
+            list_.append(glove_dictionary[word])
+        else:
+            list_.append(zero_vecotr_index)
+    count = 200-len(list_)
+    while(count):
+        list_.append(zero_vecotr_index)
+        count = count - 1
+    return list_
 
 if __name__ == "__main__":
 
