@@ -1,4 +1,6 @@
-from gensim.models import word2vec
+from soynlp.vectorizer import sent_to_word_contexts_matrix
+from eunjeon import Mecab
+from glove import Glove
 import numpy as np
 
 
@@ -45,34 +47,40 @@ def getAvgFeatureVecs(reviews,model,num_features):
 
 
 class Word2vec_embedder:
-    # 파라메터값 지정
-    num_features = 300 # 문자 벡터 차원 수
-    min_word_count = 3 # 최소 문자 수
-    num_workers = 4 # 병렬 처리 스레드 수
-    context = 10 # 문자열 창 크기
-    downsampling = 1e-3 # 문자 빈도 수 Downsample
+
     def __init__(self,train_sentences):
-        # self.make_model(train_sentences)
-        self.model = self.load_model()
+        self.make_model(train_sentences)
+        # self.model = self.load_model()
 
     # def __init__(self):
         # self.model = self.load_model('word2vec.model')
 
     def make_model(self,train_sentences):
         # 모델 학습
-        self.model = word2vec.Word2Vec(train_sentences,
-                                  workers=self.num_workers,
-                                  size=self.num_features,
-                                  min_count=self.min_word_count,
-                                  window=self.context,
-                                  sample=self.downsampling)
+        tokenizer = lambda sentence:list( filter(lambda x: ('JK' in x[1] or 'JC' in x[1] or 'JX' in x[1] or 'VC' in x[1]) == False, tagger.pos(sentence)) )
+        corpus = train_sentences
+        co_matrix,self.idx2vocab = sent_to_word_contexts_matrix(
+            corpus,
+            windows=3,
+            min_tf=10,
+            tokenizer=tokenizer, # (default) lambda x:x.split(),
+            dynamic_weight=True,
+            verbose=True
+        )
+        dictionary = {vocab:idx for idx, vocab in enumerate(self.idx2vocab)}
+        self.model = Glove(no_components=100, learning_rate=0.05, max_count=30)
+        self.model.fit(co_matrix.tocoo(), epochs=5, no_threads=4, verbose=True)
         # 학습이 완료 되면 필요없는 메모리를 unload 시킨다.
-        self.model.init_sims(replace=True)
-        self.model.save("word2vec.model")
+        self.model.add_dictionary(dictionary)
+        self.model.save("glove_model")
+
+    def get_glove_vector(self):
+        zero_vector = np.zeros(100)
+        return np.vstack((self.model.word_vectors,zero_vector))
 
 
     def get_model(self):
         return self.model
 
     def load_model(self):
-        return word2vec.Word2Vec.load('word2vec.model')
+        return Glove.load("glove_model")
