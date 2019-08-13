@@ -14,6 +14,15 @@ def read_data(file):
         data = data[1:]
     return data
 
+def texts_generalizing(texts):
+    data_tagged = texts
+    for sentence in data_tagged:
+        for word in sentence:
+            word_,tag = word
+            if('JK' in tag or 'JC' in tag or 'JX' in tag or 'VC' in tag):
+                sentence.remove(word)
+    return data_tagged
+
 if __name__ == "__main__":
 
     train_data = read_data('./data_set/ratings_train.txt')
