@@ -47,7 +47,7 @@ def getAvgFeatureVecs(reviews,model,num_features):
 class Word2vec_embedder:
     # 파라메터값 지정
     num_features = 300 # 문자 벡터 차원 수
-    min_word_count = 40 # 최소 문자 수
+    min_word_count = 3 # 최소 문자 수
     num_workers = 4 # 병렬 처리 스레드 수
     context = 10 # 문자열 창 크기
     downsampling = 1e-3 # 문자 빈도 수 Downsample

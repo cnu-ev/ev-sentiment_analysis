@@ -14,6 +14,7 @@ class Sentiment_analysis_model:
         self.x_train = trainDataVecs
         self.y_train = np.asarray(train_tags).astype('float32')
         self.run_model = self.load_keras_model()
+        # self.make_model()
 
 # print(len(x_train))
 
@@ -29,7 +30,7 @@ class Sentiment_analysis_model:
                  loss=losses.binary_crossentropy,
                  metrics=[metrics.binary_accuracy])
 
-        self.run_model.fit(self.x_train, self.y_train, epochs=20, batch_size=512)
+        self.run_model.fit(self.x_train, self.y_train, epochs=10, batch_size=512)
         self.save_model()
 
 
