@@ -15,13 +15,12 @@ def read_data(file):
     return data
 
 def texts_generalizing(texts):
-    data_tagged = texts
-    for sentence in data_tagged:
+    sentence = tagger.pos(texts)
         for word in sentence:
             word_,tag = word
             if('JK' in tag or 'JC' in tag or 'JX' in tag or 'VC' in tag):
                 sentence.remove(word)
-    return data_tagged
+    return sentence
 
 if __name__ == "__main__":
 
