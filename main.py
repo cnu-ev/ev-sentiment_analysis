@@ -29,6 +29,25 @@ class Sentiment_analysis:
 
         return sentence,score
 
+    def training_model(self):
+        #data_manager 생성
+        train_sentences = self.data_manager.get_train_sentences()
+        train_tags = self.data_manager.get_train_tags()
+
+        #학습 문장으로 word2_vec_embedder 생성
+        self.word2vec_embedder.make_model(train_sentences)
+
+
+         #word2vec 방식으로 embedding 된 vector_set
+        trainDataVecs = word2vec_embbeding_module.getAvgFeatureVecs(train_sentences , self.word2vec_embedder.model,self.word2vec_embedder.num_features)
+
+        #embedding 된 vector_set과 정답지로 Sentiment_analysis 모델 생성
+        self.sentiment_analysis_model.set_x_train(trainDataVecs)
+        self.sentiment_analysis_model.set_y_train(train_tags)
+        self.sentiment_analysis_model.make_model()
+
+
+
     def update_model(self):
         #data_manager 생성
         self.data_manager = Data_manager()
@@ -52,4 +71,4 @@ class Sentiment_analysis:
 if __name__ == "__main__":
     #전처리 완료된 학습데이터 경로
     sentiment_analysis = Sentiment_analysis()
-    sentiment_analysis.Sentiment_analysis_predict_pos_neg("테스트")
+    print(sentiment_analysis.Sentiment_analysis_predict_pos_neg(""))
