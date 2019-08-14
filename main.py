@@ -26,7 +26,7 @@ class Sentiment_analysis:
 
     def Sentiment_analysis_predict_pos_neg(self,sentence):
         # sentence, score = self.sentiment_analysis_model.predict_pos_neg_by_loaded_model(sentence,self.word2vec_embedder.model,self.word2vec_embedder.num_features)
-        sentence, score = self.sentiment_analysis_model.predict_pos_neg(sentence,self.glove_dictionary)
+        sentence, score = self.sentiment_analysis_model.predict_pos_neg_loading_model(sentence,self.glove_dictionary,self.glove_vector)
 
         return sentence,score
 
@@ -73,4 +73,4 @@ class Sentiment_analysis:
 if __name__ == "__main__":
     #전처리 완료된 학습데이터 경로
     sentiment_analysis = Sentiment_analysis()
-    print(sentiment_analysis.Sentiment_analysis_predict_pos_neg(""))
+    print(sentiment_analysis.Sentiment_analysis_predict_pos_neg("테스트코드"))
