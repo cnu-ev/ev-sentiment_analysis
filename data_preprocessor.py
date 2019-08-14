@@ -25,7 +25,7 @@ def texts_generalizing(texts):
 
 
 def indexing_embedding(texts,glove_dictionary):
-    sentence=texts
+    sentence=tagger.pos(texts)
     zero_vecotr_index = len(glove_dictionary)
     list_ = []
     for word in sentence:
