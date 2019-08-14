@@ -88,8 +88,8 @@ class AttentionModel(torch.nn.Module):
         if self.batch_size == 1:
             input = input.view(1,200,self.embedding_length)
         input = input.permute(1, 0, 2)
-        h_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size).cuda())
-        c_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size).cuda())
+        h_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size))
+        c_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size))
 
         output, (final_hidden_state, final_cell_state) = self.lstm(input, (h_0, c_0)) # final_hidden_state.size() = (1, batch_size, hidden_size)
         output = output.permute(1, 0, 2) # output.size() = (batch_size, num_seq, hidden_size)
