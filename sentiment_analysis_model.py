@@ -38,7 +38,7 @@ class Sentiment_analysis_model:
 
     def train_model(self,trainDataVecs, y_train):
         optim = torch.optim.Adam(filter(lambda p: p.requires_grad, self.model.parameters()))
-        self.model.cuda()
+        # self.model.cuda()
         self.model.train()
         count = int(len(trainDataVecs)/32)
         for i in range(count):
@@ -90,11 +90,11 @@ class Sentiment_analysis_model:
 
             print('Accuracy of the network on the test images: %d %%' % (100 * correct / 75000))
 
-    def prediction_pos_neg(self,review,glove_dictionary):
-        list_=indexing_embedding(review,glove_dictionary)
+    def predict_pos_neg(self,review,glove_dictionary):
+        list_=data_preprocessor.indexing_embedding(review,glove_dictionary)
         list_ = torch.tensor(list_)
         self.model.batch_size = 1
-        self.model.cuda()
+        # self.model.cuda()
         text = list_
         if torch.cuda.is_available():
             text = text.cuda()
@@ -102,13 +102,13 @@ class Sentiment_analysis_model:
         num_corrects = torch.max(prediction, 1)[1]
         return prediction,num_corrects
 
-    def prediction_pos_neg_loading_model(self,review,glove_dictionary):
-        list_=indexing_embedding(review,glove_dictionary)
+    def predict_pos_neg_loading_model(self,review,glove_dictionary,glove_vector):
+        list_= data_preprocessor.indexing_embedding(review,glove_dictionary)
         list_ = torch.tensor(list_)
-        self.model = self.load_torch_model()
+        self.model = self.load_torch_model(glove_dictionary,glove_vector)
         self.model.eval()
         self.model.batch_size = 1
-        self.model.cuda()
+        # self.model.cuda()
         text = list_
         if torch.cuda.is_available():
             text = text.cuda()
@@ -117,11 +117,11 @@ class Sentiment_analysis_model:
         return prediction,num_corrects
 
     def save_model(self):
-        torch.save(self.model.state_dict(), 'torch_model_state_generalized')
-        torch.save(self.model, 'torch_model_entire_generalized')
+        torch.save(self.model.state_dict(), 'torch_model_state_generalized_non_cuda')
+        torch.save(self.model, 'torch_model_entire_generalized_non_cuda')
 
     def load_torch_model(self,glove_dictionary,glove_vector):
-        vocab_size = len(glove_dictionary)
+        vocab_size = len(glove_vector)
         batch_size = 32
         learning_rate = 2e-5
         output_size = 2
@@ -129,7 +129,7 @@ class Sentiment_analysis_model:
         embedding_length = 100
         word_embeddings = torch.from_numpy(glove_vector)
         model = AttentionModel(batch_size,output_size, hidden_size, vocab_size, embedding_length, word_embeddings)
-        model.load_state_dict(torch.load('torch_model_state_generalized'), strict=False)
+        model.load_state_dict(torch.load('torch_model_state_generalized_non_cuda'), strict=False)
         return model
 
     def set_x_train(trainDataVecs):
