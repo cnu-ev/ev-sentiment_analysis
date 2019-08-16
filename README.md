@@ -63,4 +63,4 @@ from : https://nlp.stanford.edu/projects/glove/
 ![손실도.png](./손실도.PNG)
 
 ​												Glove_ERR = 0.1327     Word2Vec_ERR = 0.1483<br/>
-​												Glove_FPR = 0.1111     Word2Vec_FPR = 0.1250<br/><
+​												Glove_FPR = 0.1111     Word2Vec_FPR = 0.1250<br/>
