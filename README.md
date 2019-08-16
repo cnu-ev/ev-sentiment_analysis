@@ -29,7 +29,7 @@ Pytorch_ver - 문장들을 Glove 임베딩하여 LSTM + Attention 를 사용하�
 
 1.Word2Vec
 
-![Word2Vec.png](./Word2Vec.png)
+![Word2Vec.png](./Word2vec.png)
 from : https://becominghuman.ai/how-does-word2vecs-skip-gram-work-f92e0525def4
 
 **Word2Vec**은 중심단어와 주변단어 벡터의 내적이 코사인 유사도가 되도록 단어벡터를 벡터공간에 임베딩.<br/>
@@ -53,14 +53,14 @@ from : https://nlp.stanford.edu/projects/glove/
 
 75000개의 test set에 대해서...
 
-![정확도.png](./정확도.png)
+![정확도.png](./정확도.PNG)
 
 ​												Glove_ACC = 0.8672      Word2Vec_ACC = 0.8509
 ​												Glove_SN = 0.8458        Word2Vec_SN = 0.8271
 ​												Glove_PREC = 0.8847    Word2Vec_PREC = 0.8697
 ​												Glove_SP = 0.8888         Word2Vec_SP = 0.8749
 
-![손실도.png](./손실도.png)
+![손실도.png](./손실도.PNG)
 
 ​												Glove_ERR = 0.1327     Word2Vec_ERR = 0.1483
 ​												Glove_FPR = 0.1111     Word2Vec_FPR = 0.1250
