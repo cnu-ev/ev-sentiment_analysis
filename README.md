@@ -53,14 +53,14 @@ from : https://nlp.stanford.edu/projects/glove/
 
 75000개의 test set에 대해서...
 
-<center>![정확도.png](./정확도.PNG)</center>
+![정확도.png](./정확도.PNG)
 
-​												<center>Glove_ACC = 0.8672      Word2Vec_ACC = 0.8509<br/></center>
-​												<center>Glove_SN = 0.8458        Word2Vec_SN = 0.8271<br/></center>
-​												<center>Glove_PREC = 0.8847    Word2Vec_PREC = 0.8697<br/></center>
-​												<center>Glove_SP = 0.8888         Word2Vec_SP = 0.8749<br/></center>
+​												Glove_ACC = 0.8672      Word2Vec_ACC = 0.8509<br/>
+​												Glove_SN = 0.8458       Word2Vec_SN = 0.8271<br/>
+​												Glove_PREC = 0.8847     Word2Vec_PREC = 0.8697<br/>
+​												Glove_SP = 0.8888       Word2Vec_SP = 0.8749<br/>
 
-<center>![손실도.png](./손실도.PNG) {:.aligncenter}</center>
+![손실도.png](./손실도.PNG)
 
-​												<center>Glove_ERR = 0.1327     Word2Vec_ERR = 0.1483<br/></center>
-​												<center>Glove_FPR = 0.1111     Word2Vec_FPR = 0.1250<br/></center>
+​												Glove_ERR = 0.1327     Word2Vec_ERR = 0.1483<br/>
+​												Glove_FPR = 0.1111     Word2Vec_FPR = 0.1250<br/><
